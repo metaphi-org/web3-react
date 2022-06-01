@@ -1,14 +1,17 @@
-import { useEffect } from 'react'
-import { hooks, walletConnect } from '../../connectors/walletConnect'
+import { useState } from 'react'
+import { hooks, metaphi } from '../../connectors/metaphiWallet'
 import { Accounts } from '../Accounts'
 import { Card } from '../Card'
-import { Chain } from '../Chain'
 import { ConnectWithSelect } from '../ConnectWithSelect'
 import { Status } from '../Status'
+// Metaphi components.
+import { MetaphiModal } from '@metaphi/airwallet-ui'
+import '@metaphi/airwallet-ui/dist/main.css'
 
 const { useChainId, useAccounts, useError, useIsActivating, useIsActive, useProvider, useENSNames } = hooks
 
-export default function WalletConnectCard() {
+export default function MetaphiCard() {
+  const [value, setValue] = useState(0)
   const chainId = useChainId()
   const accounts = useAccounts()
   const error = useError()
@@ -18,29 +21,30 @@ export default function WalletConnectCard() {
 
   const provider = useProvider()
   const ENSNames = useENSNames(provider)
-
-  // attempt to connect eagerly on mount
-  // useEffect(() => {
-  //   void walletConnect.connectEagerly()
-  // }, [])
+  console.log('Provider in Metaphi', provider)
+  console.log('isActive: ', isActive)
+  console.log('chainId: ', chainId)
+  console.log('accounts: ', accounts)
 
   return (
     <Card>
       <div>
-        <b>WalletConnect</b>
+        <b>Metaphi</b>
         <Status isActivating={isActivating} error={error} isActive={isActive} />
         <div style={{ marginBottom: '1rem' }} />
-        <Chain chainId={chainId} />
         <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
       </div>
       <div style={{ marginBottom: '1rem' }} />
       <ConnectWithSelect
-        connector={walletConnect}
+        connector={metaphi}
         chainId={chainId}
         isActivating={isActivating}
         error={error}
         isActive={isActive}
       />
+      <MetaphiModal />
+      <div id="mWalletContainer"></div>
+      <button onClick={(e) => setValue(value+1)}>Click {value}</button>
     </Card>
   )
 }
