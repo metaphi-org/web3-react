@@ -136,7 +136,6 @@ export function ConnectWithSelect({
                     ? connector.activate(desiredChainId === -1 ? undefined : desiredChainId)
                     : connector.activate(desiredChainId === -1 ? undefined : getAddChainParameters(desiredChainId))
           }
-          disabled={isActivating}
         >
           Connect
         </button>

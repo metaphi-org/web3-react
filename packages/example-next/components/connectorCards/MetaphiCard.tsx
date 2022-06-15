@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { hooks, metaphi } from '../../connectors/metaphiWallet'
 import { Accounts } from '../Accounts'
 import { Card } from '../Card'
@@ -10,7 +10,6 @@ import { ethers } from 'ethers'
 import '@metaphi/airwallet-ui/dist/main.css'
 
 const { useChainId, useAccounts, useError, useIsActivating, useIsActive, useProvider, useENSNames } = hooks
-
 
 const CONTRACT_ADDRESS = `0x3591183651728F8d7e6F1115d52c2200f56F4e4a`;
 
@@ -59,15 +58,30 @@ export default function MetaphiCard() {
   console.log('chainId: ', chainId)
   console.log('accounts: ', accounts)
 
-  const handleSignMessage = async () => {
+  useEffect(() => {
+    const init = async () => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      await metaphi.isomorphicInitialize()
+    }
+    void init()
+  }, [])
+
+  const handleSignMessage = async (): Promise<void> => {
+    console.log('Accounts: ', accounts[0])
     const signer = provider.getSigner(accounts[0]);
 
     const message = `Hello, from Metaphi`;
-    const value = await signer.signMessage(message);
-    alert(value)
+    try {
+      const value = await signer.signMessage(message);
+      console.log('Signed message: ', value)
+    } catch (ex) {
+      console.log(ex)
+    }
+    
   }
 
-  const handleSignTransaction = async () => {
+  const handleSignTransaction = async (): Promise<void> => {
     // Signer
     const address = accounts[0];
     const signer = provider.getSigner(address);
@@ -104,10 +118,10 @@ export default function MetaphiCard() {
         error={error}
         isActive={isActive}
       />
-      <MetaphiModal />
-      <div id="mWalletContainer"></div>
       <button onClick={handleSignMessage}>Sign Message</button>
       <button onClick={handleSignTransaction}>Sign Transaction</button>
+      <div id="mWalletContainer"></div>
+      <MetaphiModal />
     </Card>
   )
 }

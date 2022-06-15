@@ -17,7 +17,4 @@ const config = {
     },
 }
 
-// TODO: 
-// const allowedChainIds = [];
-
 export const [metaphi, hooks] = initializeConnector<MetaphiConnector>((actions) => new MetaphiConnector(actions, false, config))
