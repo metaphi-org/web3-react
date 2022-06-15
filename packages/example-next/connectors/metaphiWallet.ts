@@ -9,10 +9,12 @@ const config = {
         dApp: process.env.NEXT_PUBLIC_DAPP,
     },
     networkConfig: {
-        rpcUrl: "https://matic-mumbai.chainstacklabs.com"
+      rpcUrl: `https://matic-mumbai.chainstacklabs.com`,
+      name: `Mumbai Testnet`,
+      chainId: 80001,
     },
     custom: {
-    }
+    },
 }
 
 // TODO: 
