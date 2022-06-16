@@ -14,6 +14,7 @@
     "@metaphi/airwallet-api": "^0.0.4-alpha.0",
     "@metaphi/airwallet-integrations": "^1.0.1-alpha.6",
     "@metaphi/airwallet-ui": "^0.0.18-alpha.1",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@web3-react/core": "8.0.30-beta.0",
     "@web3-react/empty": "8.0.17-beta.0",
     "@web3-react/gnosis-safe": "8.0.3-beta.0",
