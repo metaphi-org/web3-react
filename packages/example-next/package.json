@@ -2,6 +2,7 @@
   "private": true,
   "name": "example-next",
   "scripts": {
+    "build": "next build",
     "start": "next dev",
     "pin": "sh -c '{ for X in {coinbase-wallet,core,eip1193,empty,gnosis-safe,metamask,network,types,url,walletconnect}; do lerna add @web3-react/$X --exact --no-bootstrap --scope=example-next; done }'"
   },
@@ -11,7 +12,7 @@
     "@ethersproject/providers": "^5.6.0",
     "@ethersproject/units": "^5.6.0",
     "@metaphi/airwallet-api": "^0.0.4-alpha.0",
-    "@metaphi/airwallet-integrations": "^1.0.1-alpha.4",
+    "@metaphi/airwallet-integrations": "^1.0.1-alpha.6",
     "@metaphi/airwallet-ui": "^0.0.18-alpha.1",
     "@web3-react/coinbase-wallet": "8.0.31-beta.0",
     "@web3-react/core": "8.0.30-beta.0",

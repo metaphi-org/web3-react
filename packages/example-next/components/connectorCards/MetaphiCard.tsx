@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { hooks, metaphi } from '../../connectors/metaphiWallet'
 import { Accounts } from '../Accounts'
 import { Card } from '../Card'
 import { ConnectWithSelect } from '../ConnectWithSelect'
@@ -7,10 +6,11 @@ import { Status } from '../Status'
 // Metaphi components.
 import { MetaphiModal } from '@metaphi/airwallet-ui'
 import { ethers } from 'ethers'
+import { initializeConnector } from '@web3-react/core'
+import { MetaphiConnector } from '@metaphi/airwallet-integrations'
 import '@metaphi/airwallet-ui/dist/main.css'
 
-const { useChainId, useAccounts, useError, useIsActivating, useIsActive, useProvider, useENSNames } = hooks
-
+// Contact details.
 const CONTRACT_ADDRESS = `0x3591183651728F8d7e6F1115d52c2200f56F4e4a`;
 
 const abi = [
@@ -42,8 +42,31 @@ const abi = [
   },
 ];
 
+const config = {
+    accountConfig: {
+        clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+        apiKey: process.env.NEXT_PUBLIC_API_KEY,
+        domain: process.env.NEXT_PUBLIC_DOMAIN,
+        dApp: process.env.NEXT_PUBLIC_DAPP,
+    },
+    networkConfig: {
+      rpcUrl: `https://rpc-mumbai.maticvigil.com/v1/228086989d463ee6d4d29dde983a0db83b65ef24`,
+      name: `Mumbai Testnet`,
+      chainId: 80001,
+    },
+    custom: {
+      userInputMethod: undefined,
+    },
+}
+
+// Connector. Move to different file.
+const [metaphi, hooks] = initializeConnector<MetaphiConnector>((actions) => new MetaphiConnector(actions, false, config))
+const { useChainId, useAccounts, useError, useIsActivating, useIsActive, useProvider, useENSNames } = hooks
+
+// Component.
 export default function MetaphiCard() {
-  const [value, setValue] = useState(0)
+  const [loaded, setLoaded] = useState(false)
+
   const chainId = useChainId()
   const accounts = useAccounts()
   const error = useError()
@@ -59,12 +82,10 @@ export default function MetaphiCard() {
   console.log('accounts: ', accounts)
 
   useEffect(() => {
-    const init = async () => {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      await metaphi.isomorphicInitialize()
-    }
-    void init()
+    console.log('Initializing plugin.')
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    async function loadPlugin() { await metaphi.addPlugin(); setLoaded(true) }
+    void loadPlugin()
   }, [])
 
   const handleSignMessage = async (): Promise<void> => {
@@ -75,6 +96,7 @@ export default function MetaphiCard() {
     try {
       const value = await signer.signMessage(message);
       console.log('Signed message: ', value)
+      alert('Check console.')
     } catch (ex) {
       console.log(ex)
     }
@@ -97,14 +119,16 @@ export default function MetaphiCard() {
 
     try {
       console.log("Calling contract function ...")
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const tx = await helloWorldContract.set(1);
       console.log(tx);
+      alert('Check console.')
     } catch (ex) {
       console.log(`Error signing: `, ex);
     }
   }
 
-  return (
+  const cardContent = (
     <Card>
       <div>
         <b>Metaphi</b>
@@ -126,8 +150,15 @@ export default function MetaphiCard() {
           <button onClick={handleSignTransaction}>Sign Transaction</button>
         </>
       }
+    </Card>
+  )
+
+  return (
+    <>
+      { loaded && cardContent }
+      {/** Should always be rendered for Metaphi plugin to populate. */}
       <div id="mWalletContainer"></div>
       <MetaphiModal />
-    </Card>
+    </>
   )
 }
