@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useEffect, useState } from 'react'
 import { Accounts } from '../Accounts'
 import { Card } from '../Card'
@@ -119,6 +121,7 @@ export default function MetaphiCard() {
 
     try {
       console.log("Calling contract function ...")
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const tx = await helloWorldContract.set(1);
       console.log(tx);
