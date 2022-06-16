@@ -2,7 +2,6 @@
   "private": true,
   "name": "example-next",
   "scripts": {
-    "build": "next build",
     "start": "next dev",
     "pin": "sh -c '{ for X in {coinbase-wallet,core,eip1193,empty,gnosis-safe,metamask,network,types,url,walletconnect}; do lerna add @web3-react/$X --exact --no-bootstrap --scope=example-next; done }'"
   },
@@ -25,7 +24,9 @@
     "next-transpile-modules": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.0.0",
-    "web3-react": "^5.0.5"
+    "web3-react": "^5.0.5",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.1.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
