@@ -82,6 +82,7 @@ export default function MetaphiCard() {
   }
 
   const handleSignTransaction = async (): Promise<void> => {
+    console.log("Signing transaction")
     // Signer
     const address = accounts[0];
     const signer = provider.getSigner(address);
@@ -95,6 +96,7 @@ export default function MetaphiCard() {
     );
 
     try {
+      console.log("Calling contract function ...")
       const tx = await helloWorldContract.set(1);
       console.log(tx);
     } catch (ex) {
@@ -118,8 +120,12 @@ export default function MetaphiCard() {
         error={error}
         isActive={isActive}
       />
-      <button onClick={handleSignMessage}>Sign Message</button>
-      <button onClick={handleSignTransaction}>Sign Transaction</button>
+      {
+        isActive && <>
+          <button onClick={handleSignMessage}>Sign Message</button>
+          <button onClick={handleSignTransaction}>Sign Transaction</button>
+        </>
+      }
       <div id="mWalletContainer"></div>
       <MetaphiModal />
     </Card>
