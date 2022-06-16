@@ -2,7 +2,7 @@
   "private": true,
   "name": "example-next",
   "scripts": {
-    "build": "next build --output public",
+    "build": "next build",
     "start": "next dev",
     "pin": "sh -c '{ for X in {coinbase-wallet,core,eip1193,empty,gnosis-safe,metamask,network,types,url,walletconnect}; do lerna add @web3-react/$X --exact --no-bootstrap --scope=example-next; done }'"
   },
@@ -33,6 +33,8 @@
     "@tsconfig/recommended": "^1.0.1",
     "@types/react": "^18.0.10",
     "eslint": "^8.17.0",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0"
   }
 }
