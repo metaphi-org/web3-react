@@ -15,26 +15,27 @@
     "@metaphi/airwallet-integrations": "^1.0.1-alpha.6",
     "@metaphi/airwallet-ui": "^0.0.18-alpha.1",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.0.0",
     "@web3-react/core": "8.0.30-beta.0",
     "@web3-react/empty": "8.0.17-beta.0",
     "@web3-react/gnosis-safe": "8.0.3-beta.0",
     "@web3-react/types": "8.0.17-beta.0",
     "@web3-react/url": "8.0.22-beta.0",
+    "eslint": "^8.1.0",
+    "eslint-config-next": "^12.1.6",
     "ethers": "^5.6.8",
     "next": "^12.1.5",
     "next-transpile-modules": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.0.0",
-    "web3-react": "^5.0.5",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^8.1.0"
+    "web3-react": "^5.0.5"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/react": "^18.0.10",
-    "eslint": "^8.17.0",
-    "typescript": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0"
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.17.0",
+    "typescript": "^4.7.2"
   }
 }
