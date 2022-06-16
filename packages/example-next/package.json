@@ -14,16 +14,11 @@
     "@metaphi/airwallet-api": "^0.0.4-alpha.0",
     "@metaphi/airwallet-integrations": "^1.0.1-alpha.6",
     "@metaphi/airwallet-ui": "^0.0.18-alpha.1",
-    "@web3-react/coinbase-wallet": "8.0.31-beta.0",
     "@web3-react/core": "8.0.30-beta.0",
-    "@web3-react/eip1193": "8.0.23-beta.0",
     "@web3-react/empty": "8.0.17-beta.0",
     "@web3-react/gnosis-safe": "8.0.3-beta.0",
-    "@web3-react/metamask": "8.0.24-beta.0",
-    "@web3-react/network": "8.0.23-beta.0",
     "@web3-react/types": "8.0.17-beta.0",
     "@web3-react/url": "8.0.22-beta.0",
-    "@web3-react/walletconnect": "8.0.31-beta.0",
     "ethers": "^5.6.8",
     "next": "^12.1.5",
     "next-transpile-modules": "^9.0.0",
@@ -34,6 +29,7 @@
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/react": "^18.0.10",
+    "eslint": "^8.17.0",
     "typescript": "^4.7.2"
   }
 }
