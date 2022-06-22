@@ -11,6 +11,7 @@ import { ethers } from 'ethers'
 import { initializeConnector } from '@web3-react/core'
 import { MetaphiConnector } from '@metaphi/airwallet-integrations'
 import '@metaphi/airwallet-ui/dist/main.css'
+import { Connector } from '@web3-react/types'
 
 // Contact details.
 const CONTRACT_ADDRESS = `0x3591183651728F8d7e6F1115d52c2200f56F4e4a`;
@@ -90,6 +91,9 @@ export default function MetaphiCard() {
       const isLoaded = await metaphi.addPlugin(); 
       console.log("Metaphi Plugin Loaded.", isLoaded)
       setLoaded(isLoaded) 
+
+      // Eager connect.
+      metaphi.activate()
     }
     void loadPlugin()
   }, [])
@@ -106,7 +110,6 @@ export default function MetaphiCard() {
     } catch (ex) {
       console.log(ex)
     }
-    
   }
 
   const handleSignTransaction = async (): Promise<void> => {
@@ -117,6 +120,7 @@ export default function MetaphiCard() {
 
     // Contract
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    console.log("Initializing contract.")
     const helloWorldContract = new ethers.Contract(
       CONTRACT_ADDRESS,
       abi,
