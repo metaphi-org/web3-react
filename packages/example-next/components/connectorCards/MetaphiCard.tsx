@@ -86,7 +86,11 @@ export default function MetaphiCard() {
   useEffect(() => {
     console.log('Initializing plugin.')
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    async function loadPlugin() { await metaphi.addPlugin(); setLoaded(true) }
+    async function loadPlugin() { 
+      const isLoaded = await metaphi.addPlugin(); 
+      console.log("Metaphi Plugin Loaded.", isLoaded)
+      setLoaded(isLoaded) 
+    }
     void loadPlugin()
   }, [])
 
